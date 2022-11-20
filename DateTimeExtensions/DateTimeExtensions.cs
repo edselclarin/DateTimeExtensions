@@ -42,24 +42,21 @@ namespace DateTimeExtensions
         /// </summary>
         public static DateTime GetDateOfTarget(this DateTime dateTime, DayOfWeek targetDayOfWeek)
         {
-            int iEndOfWeek = (int)DayOfWeek.Saturday;
             int iCurr = (int)dateTime.DayOfWeek;
             int iTarg = (int)targetDayOfWeek;
             int nTarg;
 
+            // Use the day of week positions to calculate how many days are needed to jump to target.
             if (iCurr < iTarg)
             {
-                // If the current DOW falls before the target DOW, jump forward to it.
                 nTarg = iTarg - iCurr;
             }
             else
             {
-                // If the current DOW falls on or after the target DOW,
-                // jump to the end of the week and then jump to the target.
-                int nEndOfWeek = iEndOfWeek - iCurr;
-                nTarg = nEndOfWeek + (iTarg + 1);
+                nTarg = 7 - (iCurr - iTarg);
             }
 
+            // Note: .AddDays() takes leap year into account.
             return dateTime.AddDays(nTarg);
         }
     }

@@ -19,6 +19,9 @@ var dates = new DateTime[]
 
     // Case 3 - Current date is a Saturday
     new DateTime(2022, 11, 12),
+
+    // Case 4 - Current date is a Saturday, in a leap year.
+    new DateTime(2016, 2, 27)
 };
 
 foreach (var dtFrom in dates)
